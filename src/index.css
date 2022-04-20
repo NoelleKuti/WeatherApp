@@ -1,13 +1,23 @@
 body {
+  background-image: url(./assets/images/clouds.JPG);
+  background-size: cover;
+  background-position: center;
+  color: pink;
+  font-size: 1.15em;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-family: 'Dongle', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  font-family: 'Ubuntu Mono', monospace;
+}
+
+.full-page {
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
