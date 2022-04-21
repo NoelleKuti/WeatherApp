@@ -2,17 +2,22 @@ body {
   background-image: url(./assets/images/clouds.JPG);
   background-size: cover;
   background-position: center;
-  color: pink;
-  font-size: 1.15em;
-  margin: 0;
+  color: navy;
+
+  margin: 0px;
+  padding: 0px;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  
+}
+
+p, input, button, label {
   font-family: 'Dongle', sans-serif;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Ubuntu Mono', monospace;
 }
 
