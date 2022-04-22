@@ -1,36 +1,38 @@
 import styled from 'styled-components';
 import SubmitButton from './SubmitButton';
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
+import { useAppContext } from '../context/appContext'
 
 const SearchForm = () => {
     const onSubmit = e => {
         e.preventDefault();
-        // todo - send data somewhere
+        console.log(e.target.value);
     };
 
-    const [formData, setFormData] = useState({ city: '', unit: ''});
-    
+    const {
+        handleChange,
+        changeUnit,
+        expandForm
+    } = useAppContext()
 
-    const handleChange = e => {
-        setFormData(e.target.value);
+    const handleSearch = (e) => {
+        handleChange({ name: e.target.name, value: e.target.value })
     }
-
-    const [expanded, setExpanded] = useState(false);
 
 
     return (
         <Form onSubmit={onSubmit}>
             <FormRow className='form-header'>
-                <input type='text' name='city' className='city-input' placeholder='Enter City Here' onChange={handleChange} />
+                <input type='text' name='city' className='city-input' placeholder='Enter City Here' id='city' value={city} onChange={handleSearch} />
                 <SubmitButton />
             </FormRow>
             <FormRow>
                 <label htmlFor='Fahrenheit'>Fahrenheit</label>
-                <input type='radio' name='unit' value='Fahrenheit' id='Fahrenheit' onChange={handleChange} />
+                <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit' onChange={handleSearch} />
             </FormRow>
             <FormRow>
                 <label htmlFor='Celsius'>Celsius</label>
-                <input type='radio' name='Celsius' value='Celsius' id='Celsius' onChange={handleChange}/>
+                <input type='radio' name='unit' id='Celsius' value='Celsius' onChange={handleSearch}  />
             </FormRow>
         </Form>
     );
