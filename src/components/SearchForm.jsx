@@ -1,42 +1,46 @@
 import styled from 'styled-components';
 import SubmitButton from './SubmitButton';
-import { useState, useReducer } from 'react';
 import { useAppContext } from '../context/appContext'
 
 const SearchForm = () => {
+    const {
+        changeUnit,
+        expandForm,
+        city,
+        handleChange,
+        isCelsius
+    } = useAppContext()
+    
     const onSubmit = e => {
         e.preventDefault();
-        console.log(e.target.value);
+        console.log(city, isCelsius);
     };
 
-    const {
-        handleChange,
-        changeUnit,
-        expandForm
-    } = useAppContext()
-
     const handleSearch = (e) => {
-        handleChange({ name: e.target.name, value: e.target.value })
+        handleChange({
+            name: e.target.name,
+            value: e.target.value
+        })
     }
-
+ 
 
     return (
         <Form onSubmit={onSubmit}>
             <FormRow className='form-header'>
-                <input type='text' name='city' className='city-input' placeholder='Enter City Here' id='city' value={city} onChange={handleSearch} />
+                <input type='text' name='city' className='city-input' placeholder='Enter City Here' id='city' onChange={handleSearch}/>
                 <SubmitButton />
             </FormRow>
             <FormRow>
                 <label htmlFor='Fahrenheit'>Fahrenheit</label>
-                <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit' onChange={handleSearch} />
+                <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit' onChange={() => changeUnit('Fahrenheit')} />
             </FormRow>
             <FormRow>
                 <label htmlFor='Celsius'>Celsius</label>
-                <input type='radio' name='unit' id='Celsius' value='Celsius' onChange={handleSearch}  />
+                <input type='radio' name='unit' id='Celsius' value='Celsius' onChange={() => changeUnit('Celsius')}  />
             </FormRow>
         </Form>
     );
-};
+}
 
 const Form = styled.form`
     background-color: navy;
@@ -48,7 +52,11 @@ const FormRow = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: white;
 
+`
+const Fieldset = styled.div`
+    display: block;
 `
 
 export default SearchForm
