@@ -25,19 +25,24 @@ const SearchForm = () => {
  
 
     return (
-        <Form onSubmit={onSubmit}>
-            <FormRow className='form-header'>
-                <input type='text' name='city' className='city-input' placeholder='Enter City Here' id='city' onChange={handleSearch}/>
-                <SubmitButton />
-            </FormRow>
+        <Form>
             <FormRow>
-                <label htmlFor='Fahrenheit'>Fahrenheit</label>
-                <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit' onChange={() => changeUnit('Fahrenheit')} />
+                <div className='fieldset'>
+                    <input type='text' name='city' className='city-input' placeholder='Enter City Here' id='city' onChange={handleSearch}/>
+                    <SubmitButton />
+                </div>
+                <div className='fieldset'>
+                    <FormRow className='reverse'>
+                        <label htmlFor='Fahrenheit'>F</label>
+                        <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit' onChange={() => changeUnit('Fahrenheit')} />
+                    </FormRow>
+                    <FormRow className='reverse'>
+                        <label htmlFor='Celsius'>C</label>
+                        <input type='radio' name='unit' id='Celsius' value='Celsius' onChange={() => changeUnit('Celsius')}  />
+                    </FormRow>
+                </div>
             </FormRow>
-            <FormRow>
-                <label htmlFor='Celsius'>Celsius</label>
-                <input type='radio' name='unit' id='Celsius' value='Celsius' onChange={() => changeUnit('Celsius')}  />
-            </FormRow>
+            
         </Form>
     );
 }
@@ -45,18 +50,30 @@ const SearchForm = () => {
 const Form = styled.form`
     background-color: navy;
     width: 100%;
+
+    .fieldset {
+    width: 20%;
+}
+    label {
+        font-size: 2rem;
+        border: solid 2px blue;
+    }
 `
 
 const FormRow = styled.div`
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     color: white;
+    padding: 1rem;
+
+    .reverse {
+        flex-direction: row-reverse;
+        border: solid 1px white;
+        justify-content: space-between;
+    }
 
 `
-const Fieldset = styled.div`
-    display: block;
-`
+
 
 export default SearchForm
