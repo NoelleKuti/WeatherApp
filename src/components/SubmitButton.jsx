@@ -7,9 +7,11 @@ const SubmitButton = () => {
 }
 
 const Submit = styled.button`
-    width: 5rem;
+    font-size: 1.5rem;
     height: 3rem;
-    padding: 1rem;
+    width: 5rem;
+    margin-top: auto;
+
     background-color: grey;
     color: white;
     border-radius: 25px;

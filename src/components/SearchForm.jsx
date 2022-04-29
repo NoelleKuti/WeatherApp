@@ -26,22 +26,27 @@ const SearchForm = () => {
 
     return (
         <Form>
-            <FormRow>
-                <div className='fieldset'>
-                    <input type='text' name='city' className='city-input' placeholder='Enter City Here' id='city' onChange={handleSearch}/>
-                    <SubmitButton />
+            <div className='row'>
+                <div className='row cityField'>
+                    <div className='column'>
+                        <label htmlFor='city'>
+                            Enter City Here:
+                        </label>
+                        <input type='text' name='city' placeholder='Enter City Here' id='city' onChange={handleSearch}/>
+                    </div>
+                    <SubmitButton/>
                 </div>
-                <div className='fieldset'>
-                    <FormRow className='reverse'>
+                <div className='row unitField'>
+                    <div className='row'>
                         <label htmlFor='Fahrenheit'>F</label>
                         <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit' onChange={() => changeUnit('Fahrenheit')} />
-                    </FormRow>
-                    <FormRow className='reverse'>
+                    </div>
+                    <div className='row'>
                         <label htmlFor='Celsius'>C</label>
                         <input type='radio' name='unit' id='Celsius' value='Celsius' onChange={() => changeUnit('Celsius')}  />
-                    </FormRow>
+                    </div>
                 </div>
-            </FormRow>
+            </div>
             
         </Form>
     );
@@ -51,29 +56,25 @@ const Form = styled.form`
     background-color: navy;
     width: 100%;
 
-    .fieldset {
-    width: 20%;
-}
+    .cityField {
+        width: 40%;
+        justify-content: space-between;
+        align-content: center;
+    }
+
+    .unitField {
+        width: 20%;
+    }
+
     label {
         font-size: 2rem;
-        border: solid 2px blue;
-    }
-`
-
-const FormRow = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: white;
-    padding: 1rem;
-
-    .reverse {
-        flex-direction: row-reverse;
-        border: solid 1px white;
-        justify-content: space-between;
+        color: white;
     }
 
+
+    
 `
+
 
 
 export default SearchForm
