@@ -10,6 +10,7 @@ const initialState = {
     city: '', 
     isCelsius: false,
     formExpanded: false,
+    data: {},
  }
 
  const AppContext = createContext(initialState)
