@@ -5,15 +5,14 @@ import { useAppContext } from '../context/appContext'
 const SearchForm = () => {
     const {
         changeUnit,
-        expandForm,
-        city,
+        fetchData,
         handleChange,
-        isCelsius
+        state,
     } = useAppContext()
     
     const onSubmit = e => {
         e.preventDefault();
-        console.log(city, isCelsius);
+        fetchData(state.city, state.unit);
     };
 
     const handleSearch = (e) => {
@@ -34,7 +33,7 @@ const SearchForm = () => {
                         </label>
                         <input type='text' name='city' placeholder='Enter City Here' id='city' onChange={handleSearch}/>
                     </div>
-                    <SubmitButton/>
+                    <SubmitButton onClick={() => onSubmit}/>
                 </div>
                 <div className='row unitField'>
                     <div className='row'>

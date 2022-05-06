@@ -4,6 +4,7 @@ import {
     CHANGE_UNIT,
     EXPAND_FORM,
     HANDLE_CHANGE,
+    FETCH_DATA,
 } from './actions'
 
 const initialState = { 
@@ -33,7 +34,15 @@ const initialState = {
 
     const handleChange = ({ name, value }) => {
         dispatch({ 
-            type: HANDLE_CHANGE, payload: { name, value}
+            type: HANDLE_CHANGE, 
+            payload: { name, value}
+        })
+    }
+
+    const getData = ({city, unit}) => {
+        dispatch({
+            type: FETCH_DATA,
+            payload: { city, unit }
         })
     }
 
@@ -43,6 +52,7 @@ const initialState = {
             changeUnit,
             expandForm,
             handleChange,
+            getData,
         }}>
             { children }
         </AppContext.Provider>
