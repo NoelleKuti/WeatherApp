@@ -4,20 +4,22 @@ import {
     CHANGE_UNIT,
     EXPAND_FORM,
     HANDLE_CHANGE,
-    FETCH_DATA,
+    SET_DATA,
 } from './actions'
 
 const initialState = { 
     city: '', 
     isCelsius: false,
     formExpanded: false,
-    data: {},
+    data: '',
  }
 
  const AppContext = createContext(initialState)
 
  const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
+
+
 
     const changeUnit = (unit) => {
         dispatch({ 
@@ -39,10 +41,10 @@ const initialState = {
         })
     }
 
-    const getData = ({city, unit}) => {
+    const setData = ({city, unit, data}) => {
         dispatch({
-            type: FETCH_DATA,
-            payload: { city, unit }
+            type: SET_DATA,
+            payload: { city, unit, data }
         })
     }
 
@@ -52,7 +54,7 @@ const initialState = {
             changeUnit,
             expandForm,
             handleChange,
-            getData,
+            setData,
         }}>
             { children }
         </AppContext.Provider>

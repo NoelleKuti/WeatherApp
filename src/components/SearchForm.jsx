@@ -5,14 +5,32 @@ import { useAppContext } from '../context/appContext'
 const SearchForm = () => {
     const {
         changeUnit,
-        fetchData,
+        setData,
         handleChange,
         state,
+        data,
     } = useAppContext()
     
-    const onSubmit = e => {
+    const onSubmit = async (dispatch, e) => {
         e.preventDefault();
-        fetchData(state.city, state.unit);
+        let payload = {
+            city: state.city,
+            unit: state.unit,
+        }
+
+        console.log(payload);
+       
+        let baseUrl = 'http://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + state.city + '&days=3&aqi=no&alerts=no'
+            
+        const response = await fetch(baseUrl);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`); // handle errors
+            }
+        
+        const data = await response.json(); // response
+        console.log(data);
+        
     };
 
     const handleSearch = (e) => {
@@ -33,7 +51,7 @@ const SearchForm = () => {
                         </label>
                         <input type='text' name='city' placeholder='Enter City Here' id='city' onChange={handleSearch}/>
                     </div>
-                    <SubmitButton onClick={() => onSubmit}/>
+                    <SubmitButton clickFn={() => onSubmit}/>
                 </div>
                 <div className='row unitField'>
                     <div className='row'>
@@ -52,7 +70,6 @@ const SearchForm = () => {
 }
 
 const Form = styled.form`
-    background-color: navy;
     width: 100%;
 
     .cityField {

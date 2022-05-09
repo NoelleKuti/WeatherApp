@@ -2,8 +2,17 @@ import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
 
 const WeatherData = () => {
+  
+  
+  const state = useAppContext();
+
   return (
-    <div>WeatherData</div>
+    <DataPanel>
+        <p> Weather Data  </p>
+
+
+
+    </DataPanel>
   )
 }
 

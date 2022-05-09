@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SearchForm from './SearchForm';
+import { SearchForm, WeatherData } from "./index"
 
 const WeatherPanel = () => {
 
@@ -7,11 +7,7 @@ const WeatherPanel = () => {
         <Panel>
             <div className='panel'>
                 <SearchForm />
-                <div className='data-body'>
-                    <p className='temp'> WEATHER DATA GOES HERE </p>
-
-
-                </div>
+                <WeatherData />
             </div>
         </Panel>
     );

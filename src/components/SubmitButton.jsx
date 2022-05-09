@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const SubmitButton = () => {
+const SubmitButton = ({clickFn}) => {
   return (
-    <Submit type='submit'>Enter</Submit>
+    <Submit type='submit' onSubmit={clickFn}>Enter</Submit>
   )
 }
 
