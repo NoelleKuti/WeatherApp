@@ -1,10 +1,8 @@
 import styled from 'styled-components'
-import { useAppContext } from '../context/appContext'
+
 
 const WeatherData = () => {
   
-  
-  const state = useAppContext();
 
   return (
     <DataPanel>

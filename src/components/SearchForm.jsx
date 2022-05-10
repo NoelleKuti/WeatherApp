@@ -1,46 +1,33 @@
 import styled from 'styled-components';
-import SubmitButton from './SubmitButton';
-import { useAppContext } from '../context/appContext'
+import { useState, useEffect } from 'react'
 
 const SearchForm = () => {
-    const {
-        changeUnit,
-        setData,
-        handleChange,
-        state,
-        data,
-    } = useAppContext()
     
-    const onSubmit = async (dispatch, e) => {
+    const [unit, setUnit] = useState('Fahrenheit')
+    const [city, setCity] = useState('')
+    
+    const fetchData = () => {
+        let baseUrl = 'http://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + city + '&days=3&aqi=no&alerts=no'
+        
+        return fetch(baseUrl)
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error(error));
+    }
+
+    const onSubmit = (e) => {
         e.preventDefault();
-        let payload = {
-            city: state.city,
-            unit: state.unit,
-        }
-
-        console.log(payload);
-       
-        let baseUrl = 'http://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + state.city + '&days=3&aqi=no&alerts=no'
+        fetchData();
+    }       
             
-        const response = await fetch(baseUrl);
+    const changeCity = (e) => {
+        setCity(e.target.value);
+    }
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`); // handle errors
-            }
-        
-        const data = await response.json(); // response
-        console.log(data);
-        
-    };
-
-    const handleSearch = (e) => {
-        handleChange({
-            name: e.target.name,
-            value: e.target.value
-        })
+    const changeUnit = (e) => {
+        setUnit(e.target.value);
     }
  
-
     return (
         <Form>
             <div className='row'>
@@ -49,18 +36,18 @@ const SearchForm = () => {
                         <label htmlFor='city'>
                             Enter City Here:
                         </label>
-                        <input type='text' name='city' placeholder='Enter City Here' id='city' onChange={handleSearch}/>
+                        <input type='text' name='city' placeholder='Enter City Here' id='city' onChange={changeCity}/>
                     </div>
-                    <SubmitButton clickFn={() => onSubmit}/>
+                    <button type='button' onClick={onSubmit}> Submit </button>
                 </div>
                 <div className='row unitField'>
                     <div className='row'>
                         <label htmlFor='Fahrenheit'>F</label>
-                        <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit' onChange={() => changeUnit('Fahrenheit')} />
+                        <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit' onChange={changeUnit} />
                     </div>
                     <div className='row'>
                         <label htmlFor='Celsius'>C</label>
-                        <input type='radio' name='unit' id='Celsius' value='Celsius' onChange={() => changeUnit('Celsius')}  />
+                        <input type='radio' name='unit' id='Celsius' value='Celsius' onChange={changeUnit}  />
                     </div>
                 </div>
             </div>
@@ -86,9 +73,6 @@ const Form = styled.form`
         font-size: 2rem;
         color: white;
     }
-
-
-    
 `
 
 
