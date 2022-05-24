@@ -1,20 +1,7 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react'
 
-const SearchForm = () => {
+const SearchForm = ({ unit, setUnit, setCity, fetchData }) => {
     
-    const [unit, setUnit] = useState('Fahrenheit')
-    const [city, setCity] = useState('')
-    
-    const fetchData = () => {
-        let baseUrl = 'http://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + city + '&days=3&aqi=no&alerts=no'
-        
-        return fetch(baseUrl)
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.error(error));
-    }
-
     const onSubmit = (e) => {
         e.preventDefault();
         fetchData();
@@ -43,11 +30,15 @@ const SearchForm = () => {
                 <div className='row unitField'>
                     <div className='row'>
                         <label htmlFor='Fahrenheit'>F</label>
-                        <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit' onChange={changeUnit} />
+                        <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit'
+                        checked={unit==='Fahrenheit'} onChange={changeUnit} />
                     </div>
                     <div className='row'>
                         <label htmlFor='Celsius'>C</label>
-                        <input type='radio' name='unit' id='Celsius' value='Celsius' onChange={changeUnit}  />
+                        <input type='radio' name='unit' 
+                        id='Celsius' value='Celsius'
+                        checked={unit==='Celsius'} 
+                        onChange={changeUnit}  />
                     </div>
                 </div>
             </div>

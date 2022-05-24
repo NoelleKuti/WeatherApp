@@ -1,13 +1,27 @@
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import { SearchForm, WeatherData } from "./index"
 
 const WeatherPanel = () => {
+    const [unit, setUnit] = useState('Fahrenheit');
+    const [city, setCity] = useState('');
+    const [data, setData] = useState({});
+    
+    const fetchData = () => {
+        let baseUrl = 'http://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + city + '&days=3&aqi=no&alerts=no'
+        
+        return fetch(baseUrl)
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .then((data) => setData(data))
+            .catch((error) => console.error(error));
+    }
 
     return (
         <Panel>
             <div className='panel'>
-                <SearchForm />
-                <WeatherData />
+                <SearchForm unit={unit} setUnit={setUnit} setCity={setCity} fetchData={fetchData}/>
+                <WeatherData data={data}/>
             </div>
         </Panel>
     );

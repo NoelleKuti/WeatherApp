@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 
-const WeatherData = () => {
+const WeatherData = ({data}) => {
   
 
   return (
