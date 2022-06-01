@@ -16,8 +16,8 @@ const SearchForm = ({ unit, setUnit, setCity, fetchData }) => {
     }
  
     return (
-        <Form>
-            <div className='row'>
+        <Form onSubmit={onSubmit}>
+            <div className='formFields'>
                 <div className='row cityField'>
                     <div className='column'>
                         <label htmlFor='city'>
@@ -25,7 +25,7 @@ const SearchForm = ({ unit, setUnit, setCity, fetchData }) => {
                         </label>
                         <input type='text' name='city' placeholder='Enter City Here' id='city' onChange={changeCity}/>
                     </div>
-                    <button type='button' onClick={onSubmit}> Submit </button>
+                    <button className='submit-btn' type='submit'> Submit </button>
                 </div>
                 <div className='row unitField'>
                     <div className='row'>
@@ -49,20 +49,41 @@ const SearchForm = ({ unit, setUnit, setCity, fetchData }) => {
 
 const Form = styled.form`
     width: 100%;
+    height: 25%;
+    border-bottom: 1px white solid;
 
+    .formFields {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+    }
     .cityField {
-        width: 40%;
-        justify-content: space-between;
-        align-content: center;
+        justify-content: center;
+        width: 70%;
+        input {
+            font-size: 1.5rem;
+            height: 2rem;
+            padding: 5px;
+        }
     }
 
     .unitField {
-        width: 20%;
+        height: 3rem;
+        div {
+            padding: 1rem;
+        }
     }
 
     label {
-        font-size: 2rem;
-        color: white;
+        font-size: 1.5rem;
+    }
+
+    .submit-btn {
+        align-self: flex-end;
+        font-size: 1.5rem;
+        cursor: pointer;
     }
 `
 
