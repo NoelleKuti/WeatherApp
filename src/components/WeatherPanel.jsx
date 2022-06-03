@@ -1,36 +1,50 @@
 import React, {useState} from 'react'
 import styled from 'styled-components';
-import { SearchForm, WeatherData } from "./index"
+import { SearchForm, CurrentData } from "./index"
 
 const WeatherPanel = () => {
     const [unit, setUnit] = useState('Fahrenheit');
     const [city, setCity] = useState('');
-    const [data, setData] = useState(null);
+    const [currentData, setCurrentData] = useState({});
+    const [userLocation, setUserLocation] = useState('');
+    const [latlon, setLatlon] = useState('');
+    const [forecastData, setForecastData] = useState({});
+    const [condition, setCondition] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+  
     
-    const fetchData = () => {
-        let baseUrl = 'http://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + city + '&days=3&aqi=no&alerts=no'
+
+        const fetchData = () => {
+            let baseUrl = 'http://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + city + '&days=3&aqi=no&alerts=no'
         
-        return fetch(baseUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                setData(data);
-            })
-            .catch((error) => console.error(error));
-    }
+            return fetch(baseUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    setIsLoading(false);
+                    setCondition(data.current.condition);
+                    setUserLocation(data.location.name + ', ' + data.location.country);
+                    setCurrentData(data.current);
+                    setForecastData(data.forecast)
+                    setLatlon(data.location.lat + ', ' + data.location.lon);
+                    console.log(currentData.condition);
+                })
+                .catch((error) => console.error(error));
+        }
+
 
     return (
         <Panel>
             <div className='panel'>
                 <div className='row headers'>
-                    <h2>{data ? data.location.name + ', ' + data.location.country : ''}</h2>
+                    <h2>{userLocation ? userLocation : ''}</h2>
                     <div className='latlon'>
                         <p>Lat, Lon</p>
-                        <p>( {data ? data.location.lat + ', ' + data.location.lon : ''} )</p>
+                        <p>{latlon ? latlon : ''}</p>
                     </div>
                 </div>
                 <SearchForm unit={unit} setUnit={setUnit} setCity={setCity} fetchData={fetchData} />
-                <WeatherData data={data}/>
+                {isLoading ? <p>Loading</p> : <CurrentData data={currentData} condition={condition} unit={unit} />}
+                
             </div>
         </Panel>
     );

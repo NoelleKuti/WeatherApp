@@ -1,5 +1,6 @@
 import SearchForm from "./SearchForm";
-import WeatherData from "./WeatherData";
+import CurrentData from "./CurrentData";
+import ForecastData from "./ForecastData";
 
 
-export { SearchForm, WeatherData }
+export { SearchForm, CurrentData, ForecastData }
