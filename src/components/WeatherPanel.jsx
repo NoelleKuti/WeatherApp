@@ -8,7 +8,6 @@ const WeatherPanel = () => {
     const [currentData, setCurrentData] = useState({});
     const [userLocation, setUserLocation] = useState({});
     const [forecastData, setForecastData] = useState([]);
-    const [condition, setCondition] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [showForecast, setShowForecast] = useState(false);
   
@@ -21,7 +20,6 @@ const WeatherPanel = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     setIsLoading(false);
-                    setCondition(data.current.condition);
                     setUserLocation({
                         city: data.location.name + ', ' + data.location.country,
                         latlon: data.location.lat + ', ' + data.location.lon
