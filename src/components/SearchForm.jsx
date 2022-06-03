@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-const SearchForm = ({ unit, setUnit, setCity, fetchData }) => {
+const SearchForm = ({ unit, setUnit, setCity, fetchData, showForecast, setShowForecast }) => {
     
+
     const onSubmit = (e) => {
         e.preventDefault();
         fetchData();
@@ -25,7 +26,10 @@ const SearchForm = ({ unit, setUnit, setCity, fetchData }) => {
                         </label>
                         <input type='text' name='city' placeholder='Enter City Here' id='city' onChange={changeCity}/>
                     </div>
+                    
                     <button className='submit-btn' type='submit'> Submit </button>
+                    
+                    <button type= 'button' className='toggleForecast' onClick={() => setShowForecast(!showForecast)}>{showForecast ? 'Current Forecast' : '3 Day Forecast'}</button>
                 </div>
                 <div className='row unitField'>
                     <div className='row'>

@@ -45,9 +45,14 @@ const WeatherPanel = () => {
                         <p>{userLocation ? userLocation.latlon : ''}</p>
                     </div>
                 </div>
-                <SearchForm unit={unit} setUnit={setUnit} setCity={setCity} fetchData={fetchData} />
-                {isLoading ? <p>Loading</p> : <CurrentData currentData={currentData} condition={condition} unit={unit} />}
-                {!showForecast ? <p></p> : <ForecastData forecastData={forecastData} unit={unit} />}
+                <SearchForm unit={unit} setUnit={setUnit} setCity={setCity} fetchData={fetchData} showForecast={showForecast} setShowForecast={setShowForecast}/>
+
+                {!(isLoading) && !(showForecast)
+                    && <CurrentData currentData={currentData} unit={unit} />
+                }
+                {!(isLoading) && (showForecast)
+                    && <ForecastData forecastData={forecastData} unit={unit} />
+                }
                 
             </div>
         </Panel>

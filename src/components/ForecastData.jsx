@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const ForecastData = ({data, unit}) => {
+const ForecastData = ({forecastData, unit}) => {
+    console.log(forecastData);
+    
     return (
-        <DataPanel data={data}>
+        <DataPanel data={forecastData}>
             <div className='dayPanel' id='dayOne'>
                 <p>Day One</p>
             </div>
