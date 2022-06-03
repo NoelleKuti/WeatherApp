@@ -1,16 +1,16 @@
 import React, {useState} from 'react'
 import styled from 'styled-components';
-import { SearchForm, CurrentData } from "./index"
+import { SearchForm, CurrentData, ForecastData } from "./index"
 
 const WeatherPanel = () => {
     const [unit, setUnit] = useState('Fahrenheit');
     const [city, setCity] = useState('');
     const [currentData, setCurrentData] = useState({});
-    const [userLocation, setUserLocation] = useState('');
-    const [latlon, setLatlon] = useState('');
-    const [forecastData, setForecastData] = useState({});
+    const [userLocation, setUserLocation] = useState({});
+    const [forecastData, setForecastData] = useState([]);
     const [condition, setCondition] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const [showForecast, setShowForecast] = useState(false);
   
     
 
@@ -22,11 +22,14 @@ const WeatherPanel = () => {
                 .then((data) => {
                     setIsLoading(false);
                     setCondition(data.current.condition);
-                    setUserLocation(data.location.name + ', ' + data.location.country);
-                    setCurrentData(data.current);
-                    setForecastData(data.forecast)
-                    setLatlon(data.location.lat + ', ' + data.location.lon);
-                    console.log(currentData.condition);
+                    setUserLocation({
+                        city: data.location.name + ', ' + data.location.country,
+                        latlon: data.location.lat + ', ' + data.location.lon
+                    });
+                    setCurrentData({
+                        all: data.current, condition: data.current.condition
+                    });
+                    setForecastData(data.forecast.forecastDay)
                 })
                 .catch((error) => console.error(error));
         }
@@ -36,14 +39,15 @@ const WeatherPanel = () => {
         <Panel>
             <div className='panel'>
                 <div className='row headers'>
-                    <h2>{userLocation ? userLocation : ''}</h2>
+                    <h2>{userLocation ? userLocation.city : ''}</h2>
                     <div className='latlon'>
                         <p>Lat, Lon</p>
-                        <p>{latlon ? latlon : ''}</p>
+                        <p>{userLocation ? userLocation.latlon : ''}</p>
                     </div>
                 </div>
                 <SearchForm unit={unit} setUnit={setUnit} setCity={setCity} fetchData={fetchData} />
-                {isLoading ? <p>Loading</p> : <CurrentData data={currentData} condition={condition} unit={unit} />}
+                {isLoading ? <p>Loading</p> : <CurrentData currentData={currentData} condition={condition} unit={unit} />}
+                {!showForecast ? <p></p> : <ForecastData forecastData={forecastData} unit={unit} />}
                 
             </div>
         </Panel>

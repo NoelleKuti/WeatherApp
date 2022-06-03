@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 
-const CurrentData = ({data, unit}) => {
-    const both_Data = {
-      condition: data.condition.text,
-      icon: data.condition.icon,
+const CurrentData = ({currentData, unit}) => {
+  let data = currentData.all;
+  let condition = currentData.condition;
+  const both_Data = {
+      condition: condition.text,
+      icon: condition.icon,
       humidity: data.humidity,
       wind_dir: data.wind_dir,
     }
@@ -83,8 +85,8 @@ const DataPanel = styled.div`
       min-width: 12rem;
       height: 10rem;
       align-items: center;
-      justify-items: space-around;
-      margin: 0px auto;
+      justify-items: center;
+      margin: 15px auto;
       p {
         font-size: 4vw;
         min-width: 0;
