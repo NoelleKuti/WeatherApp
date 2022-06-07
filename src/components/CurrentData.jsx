@@ -78,24 +78,14 @@ const DataPanel = styled.div`
     justify-content: space-evenly;
     padding: 1rem;
     
-    .box {
-      display: flex;
-      border: 1px white solid;
-      flex-direction: column;
-      min-width: 12rem;
-      height: 10rem;
-      align-items: center;
-      justify-items: center;
-      margin: 15px auto;
-      p {
-        font-size: 4vw;
-        min-width: 0;
-        min-height: 0;
-        padding: 0;
-        margin: 0;
-      }
-
+    p {
+      font-size: 4vw;
+      min-width: 0;
+      min-height: 0;
+      padding: 0;
+      margin: 0;
     }
+
 
 
 `

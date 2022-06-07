@@ -9,21 +9,25 @@ const ForecastData = ({forecastData, unit}) => {
         <DataPanel data={forecastData}>
             {forecastData.map((day, i) => {
                 return (
-                    <div key={i} className='dayContainer column' id={'day' + (i + 1)}>
-                        <h2>{day.date}</h2>
-                        <div className='temps box'>
+                    <div key={i} className='dayContainer' id={'day' + (i + 1)}>
+                        <h2 className='dateTitle'>{day.date}</h2>
+                        <div className='box'>
                             <h3>Min Avg Max</h3>
-                            <div className='row'>
-                                <p className='minTemp'>
+                            <div className='row temps'>
+                                <p className='temp minTemp'>
                                     {isFahrenheit ? day.day.mintemp_f + ' F' : day.day.mintemp_c + ' C'}
                                 </p>
-                                <p className='avgTemp'>
+                                <p className='temp avgTemp'>
                                     {isFahrenheit ? day.day.avgtemp_f + ' F' : day.day.avgtemp_c + ' C'}
                                 </p>
-                                <p className='maxTemp'>
+                                <p className='temp maxTemp'>
                                     {isFahrenheit ? day.day.maxtemp_f + ' F' : day.day.maxtemp_c}
                                 </p>
                             </div>
+                        </div>
+                        <div className= 'box'>
+                            <h3>Humidity</h3>
+                            <p>{day.day.avghumidity}</p>
                         </div>
                     </div>
                 )
@@ -34,53 +38,46 @@ const ForecastData = ({forecastData, unit}) => {
 }
     
 const DataPanel = styled.div`
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 1rem;
     
     .dayContainer {
         width: 100%;
-        border-bottom: 1px solid black;
-        margin: 0 auto;
-        align-content: center;
+        border-bottom: 2px solid black; 
+        display: flex;
         flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-evenly;
     }
 
-    .box {
-        display: flex;
-        border: 1px white solid;
-        flex-direction: column;
-        min-width: 12rem;
-        height: 10rem;
-        align-items: center;
-        justify-items: space-around;
-        margin: 0px auto;
-        p {
-        font-size: 4vw;
-        min-width: 0;
-        min-height: 0;
-        padding: 0;
-        margin: 0;
-        }
-
+    .dateTitle {
+        align-self: flex-start;
+        justify-self: flex-start;
+        width: 100%;
     }
 
     p {
-        font-size: 3vw;
-        padding: 1rem;
+        font-size: 2rem;
     }
-    .minTemp {
-        color: blue;
+
+    .temps {
+        justify-content: space-around;
+        width: 100%;
+        align-self: flex-end;
+        align-items: flex-start;
+        margin-bottom: 0;
+        max-height: 5.5rem;
+
+        .minTemp {
+            color: blue;
+        }
+        .avgTemp {
+            color: purple;
+        }
+        .maxTemp {
+            color: red;
+        }
     }
-    .avgTemp {
-        color: purple;
-    }
-    .maxTemp {
-        color: red;
-    }
+
+    
 
 
 `

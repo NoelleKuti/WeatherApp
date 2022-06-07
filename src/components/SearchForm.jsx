@@ -26,10 +26,6 @@ const SearchForm = ({ unit, setUnit, setCity, fetchData, showForecast, setShowFo
                         </label>
                         <input type='text' name='city' placeholder='Enter City Here' id='city' onChange={changeCity}/>
                     </div>
-                    
-                    <button className='submit-btn' type='submit'> Submit </button>
-                    
-                    <button type= 'button' className='toggleForecast' onClick={() => setShowForecast(!showForecast)}>{showForecast ? 'Current Forecast' : '3 Day Forecast'}</button>
                 </div>
                 <div className='row unitField'>
                     <div className='row'>
@@ -44,6 +40,10 @@ const SearchForm = ({ unit, setUnit, setCity, fetchData, showForecast, setShowFo
                         checked={unit==='Celsius'} 
                         onChange={changeUnit}  />
                     </div>
+                </div>
+                < div className='buttons row'>
+                    <button type='button' className='toggleForecast' onClick={() => setShowForecast(!showForecast)}>{showForecast ? 'Current Forecast' : '3 Day Forecast'}</button>
+                    <button type='submit' className='submitBtn'> Submit </button>
                 </div>
             </div>
             
@@ -84,10 +84,16 @@ const Form = styled.form`
         font-size: 1.5rem;
     }
 
-    .submit-btn {
-        align-self: flex-end;
+    button {
         font-size: 1.5rem;
         cursor: pointer;
+        padding: 1rem;
+    }
+
+    .buttons {
+        width: 80%;
+        justify-content: space-between;
+        margin-bottom: 2rem;
     }
 `
 

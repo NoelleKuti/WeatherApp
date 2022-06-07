@@ -44,3 +44,15 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
 }
 
+.box {
+  display: flex;
+  border: 1px white solid;
+  flex-direction: column;
+  min-width: 12rem;
+  height: 10rem;
+  align-items: center;
+  justify-items: space-evenly;
+  margin: 0px auto;
+
+}
+
