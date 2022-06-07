@@ -27,7 +27,11 @@ const WeatherPanel = () => {
                     setCurrentData({
                         all: data.current, condition: data.current.condition
                     });
-                    setForecastData(data.forecast.forecastDay)
+                    setForecastData([
+                        data.forecast.forecastday[0],
+                        data.forecast.forecastday[1],
+                        data.forecast.forecastday[2]
+                    ]);
                 })
                 .catch((error) => console.error(error));
         }
