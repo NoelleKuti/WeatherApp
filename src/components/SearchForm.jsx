@@ -65,11 +65,12 @@ const Form = styled.form`
     }
     .cityField {
         justify-content: center;
-        width: 70%;
+        
         input {
             font-size: 1.5rem;
             height: 2rem;
             padding: 5px;
+            width: 15rem;
         }
     }
 
@@ -91,8 +92,8 @@ const Form = styled.form`
     }
 
     .buttons {
-        width: 80%;
-        justify-content: space-between;
+        width: 15rem;
+        justify-content: space-around;
         margin-bottom: 2rem;
     }
 `

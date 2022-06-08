@@ -40,12 +40,12 @@ const WeatherPanel = () => {
     return (
         <Panel>
             <div className='panel'>
-                <div className='row headers'>
-                    <h2>{userLocation ? userLocation.city : ''}</h2>
+                <div className='headers'>
                     <div className='latlon'>
-                        <p>Lat, Lon</p>
-                        <p>{userLocation ? userLocation.latlon : ''}</p>
+                        <p>{"(Lat, Lon) : " + (userLocation ? userLocation.latlon : '')}
+                       </p>
                     </div>
+                    <h2>{userLocation ? userLocation.city : ''}</h2>
                 </div>
                 <SearchForm unit={unit} setUnit={setUnit} setCity={setCity} fetchData={fetchData} showForecast={showForecast} setShowForecast={setShowForecast}/>
 
@@ -76,9 +76,7 @@ const Panel = styled.div`
     }
 
     .latlon {
-        display: block;
         max-height: 3rem;
-        align-self: flex-start;
         p {
             min-width: 0;
             min-height: 0;
@@ -90,9 +88,11 @@ const Panel = styled.div`
     }
 
     .headers {
-        height: 5rem;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
         margin: 0px auto;
-        justify-content: space-between;
+        justify-content: center;
     }
     
 `

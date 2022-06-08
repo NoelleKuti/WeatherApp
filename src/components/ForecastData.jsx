@@ -41,6 +41,7 @@ const DataPanel = styled.div`
     
     .dayContainer {
         width: 100%;
+        padding-bottom: 2rem;
         border-bottom: 2px solid black; 
         display: flex;
         flex-wrap: wrap;
