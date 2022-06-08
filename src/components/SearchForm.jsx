@@ -24,7 +24,9 @@ const SearchForm = ({ unit, setUnit, setCity, fetchData, showForecast, setShowFo
                         <label htmlFor='city'>
                             Enter City Here:
                         </label>
-                        <input type='text' name='city' placeholder='Enter City Here' id='city' onChange={changeCity}/>
+                        <input
+                            className='cityInput'
+                            type='text' name='city' placeholder='Enter City Here' id='city' onChange={changeCity} />
                     </div>
                 </div>
                 <div className='row unitField'>
@@ -65,14 +67,15 @@ const Form = styled.form`
     }
     .cityField {
         justify-content: center;
-        
-        input {
+        width: 100%;
+    }
+
+    .cityInput {
             font-size: 1.5rem;
             height: 2rem;
             padding: 5px;
-            width: 15rem;
+            width: 90%;
         }
-    }
 
     .unitField {
         height: 3rem;
@@ -88,13 +91,20 @@ const Form = styled.form`
     button {
         font-size: 1.5rem;
         cursor: pointer;
-        padding: 1rem;
+        padding: 10px;
+        margin: 10px;
     }
 
     .buttons {
-        width: 15rem;
+        width: 17rem;
         justify-content: space-around;
         margin-bottom: 2rem;
+    }
+
+    @media only screen and (min-width: 768px) {
+        .panel {
+            width: 35rem;
+        }
     }
 `
 

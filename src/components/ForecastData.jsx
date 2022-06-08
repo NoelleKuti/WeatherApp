@@ -56,7 +56,7 @@ const DataPanel = styled.div`
     }
 
     p {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     .temps {

@@ -33,8 +33,8 @@ const CurrentData = ({currentData, unit}) => {
     <DataPanel data={data}>
       <div className='box' id='condition'>
         <h3>Condition:</h3>
-        <p>{data && both_Data.condition}</p>
-        {data && <img src={both_Data.icon} alt='weather icon'/>}
+        <p className='conditionText'>{data && both_Data.condition}</p>
+        {data && <img className='conditionIcon' src={both_Data.icon} alt='weather icon'/>}
       </div>
       <div className='box' id='temps'>
         <h3>Current Temps:</h3>
@@ -79,12 +79,23 @@ const DataPanel = styled.div`
     padding: 1rem;
     
     p {
-      font-size: 4vw;
-      min-width: 0;
-      min-height: 0;
-      padding: 0;
-      margin: 0;
+      font-size: 2.5rem;
+      
     }
+
+    #condition {
+      width: 90%;
+      justify-content: space-evenly;
+      height: 20rem;
+    }
+
+    .conditionText {
+      margin-top: 0;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    
 
 
 

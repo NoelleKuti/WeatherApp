@@ -65,6 +65,7 @@ const Panel = styled.div`
 
     .panel {
         width: 70%;
+        max-width: 35rem;
         min-height:50%;
         margin: 2rem auto;
         padding: 2rem;
@@ -93,6 +94,10 @@ const Panel = styled.div`
         flex-direction: column;
         margin: 0px auto;
         justify-content: center;
+        h2 {
+            width: 100%;
+            text-align: center;
+        }
     }
     
 `
