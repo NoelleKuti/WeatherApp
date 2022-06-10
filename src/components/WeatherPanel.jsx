@@ -1,8 +1,24 @@
-import React, {useState} from 'react'
+import React, {useReducer} from 'react'
 import styled from 'styled-components';
 import { SearchForm, CurrentData, ForecastData } from "./index"
+import { myReducer } from '../context/reducer';
 
 const WeatherPanel = () => {
+    const initialState = {
+        unit: '',
+        city: '',
+        userLocation: '',
+        currentData: {},
+        forecastData: [],
+        isLoading: true,
+        showForecast: false,
+    };
+    
+    const [state, dispatch] = useReducer(myReducer, initialState);
+
+    const {unit, city, userLocation, currentData, forecastData, isLoading, showForecast} = state;
+    
+    /*
     const [unit, setUnit] = useState('Fahrenheit');
     const [city, setCity] = useState('');
     const [currentData, setCurrentData] = useState({});
@@ -10,7 +26,7 @@ const WeatherPanel = () => {
     const [forecastData, setForecastData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [showForecast, setShowForecast] = useState(false);
-  
+    */
     
 
         const fetchData = () => {
@@ -19,6 +35,8 @@ const WeatherPanel = () => {
             return fetch(baseUrl)
                 .then((response) => response.json())
                 .then((data) => {
+                    dispatch({ type: 'PARSE_DATA', payload: data });
+                    /*
                     setIsLoading(false);
                     setUserLocation({
                         city: data.location.name + ', ' + data.location.country,
@@ -32,10 +50,20 @@ const WeatherPanel = () => {
                         data.forecast.forecastday[1],
                         data.forecast.forecastday[2]
                     ]);
+                    */
                 })
                 .catch((error) => console.error(error));
         }
 
+    const handleCityChange = (e) => {
+        dispatch({ type: "CHANGE_CITY", payload: e.target.value });
+    }
+    const handleUnitChange = (e) => {
+        dispatch({ type: "CHANGE_UNIT", payload: e.target.value });
+    }
+    const toggleForecast = (state) => {
+        dispatch({ type: "SHOW_FORECAST" });
+    }
 
     return (
         <Panel>
@@ -47,7 +75,7 @@ const WeatherPanel = () => {
                     </div>
                     <h2>{userLocation ? userLocation.city : ''}</h2>
                 </div>
-                <SearchForm unit={unit} setUnit={setUnit} setCity={setCity} fetchData={fetchData} showForecast={showForecast} setShowForecast={setShowForecast}/>
+                <SearchForm state={state} changeUnit={handleUnitChange} changeCity={handleCityChange} fetchData={fetchData} showForecast={showForecast} toggleForecast={toggleForecast} />
 
                 {!(isLoading) && !(showForecast)
                     && <CurrentData currentData={currentData} unit={unit} />

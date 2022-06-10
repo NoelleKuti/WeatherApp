@@ -1,20 +1,13 @@
 import styled from 'styled-components';
 
-const SearchForm = ({ unit, setUnit, setCity, fetchData, showForecast, setShowForecast }) => {
+const SearchForm = ({ state, changeCity, changeUnit, toggleForecast, fetchData }) => {
     
+    const { showForecast, unit } = state;
 
     const onSubmit = (e) => {
         e.preventDefault();
         fetchData();
     }       
-            
-    const changeCity = (e) => {
-        setCity(e.target.value);
-    }
-
-    const changeUnit = (e) => {
-        setUnit(e.target.value);
-    }
  
     return (
         <Form onSubmit={onSubmit}>
@@ -44,7 +37,7 @@ const SearchForm = ({ unit, setUnit, setCity, fetchData, showForecast, setShowFo
                     </div>
                 </div>
                 < div className='buttons row'>
-                    <button type='button' className='toggleForecast' onClick={() => setShowForecast(!showForecast)}>{showForecast ? 'Current Forecast' : '3 Day Forecast'}</button>
+                    <button type='button' className='toggleForecast' onClick={toggleForecast}>{showForecast ? 'Current Forecast' : '3 Day Forecast'}</button>
                     <button type='submit' className='submitBtn'> Submit </button>
                 </div>
             </div>
