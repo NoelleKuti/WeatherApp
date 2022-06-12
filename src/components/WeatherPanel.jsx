@@ -61,8 +61,18 @@ const WeatherPanel = () => {
     const handleUnitChange = (e) => {
         dispatch({ type: "CHANGE_UNIT", payload: e.target.value });
     }
-    const toggleForecast = (state) => {
+    const toggleForecast = () => {
         dispatch({ type: "SHOW_FORECAST" });
+    }
+
+    const renderComponent = () => {
+        if (!isLoading && showForecast) {
+            return <ForecastData forecastData={forecastData} unit={unit} />
+        } else if (!isLoading && !showForecast) {
+            return <CurrentData currentData={currentData} unit={unit} />
+        } else {
+            return <p> Still Loading ... </p>
+        }
     }
 
     return (
@@ -77,12 +87,12 @@ const WeatherPanel = () => {
                 </div>
                 <SearchForm state={state} changeUnit={handleUnitChange} changeCity={handleCityChange} fetchData={fetchData} showForecast={showForecast} toggleForecast={toggleForecast} />
 
-                {!(isLoading) && !(showForecast)
-                    && <CurrentData currentData={currentData} unit={unit} />
-                }
-                {!(isLoading) && (showForecast)
-                    && <ForecastData forecastData={forecastData} unit={unit} />
-                }
+                <div>
+                    {renderComponent()}
+                </div>
+               
+
+              
                 
             </div>
         </Panel>
