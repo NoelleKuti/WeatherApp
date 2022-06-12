@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-const SearchForm = ({ state, changeCity, changeUnit, toggleForecast, fetchData }) => {
+const SearchForm = ({ unit, showForecast, changeCity, changeUnit, toggleForecast, fetchData }) => {
     
-    const { showForecast, unit } = state;
 
     const onSubmit = (e) => {
         e.preventDefault();

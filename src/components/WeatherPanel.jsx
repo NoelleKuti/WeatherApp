@@ -5,7 +5,7 @@ import { myReducer } from '../context/reducer';
 
 const WeatherPanel = () => {
     const initialState = {
-        unit: '',
+        unit: 'Fahrenheit',
         city: '',
         userLocation: '',
         currentData: {},
@@ -30,7 +30,7 @@ const WeatherPanel = () => {
     
 
         const fetchData = () => {
-            let baseUrl = 'http://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + city + '&days=3&aqi=no&alerts=no'
+            let baseUrl = 'https://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + city + '&days=3&aqi=no&alerts=no'
         
             return fetch(baseUrl)
                 .then((response) => response.json())
@@ -85,7 +85,7 @@ const WeatherPanel = () => {
                     </div>
                     <h2>{userLocation ? userLocation.city : ''}</h2>
                 </div>
-                <SearchForm state={state} changeUnit={handleUnitChange} changeCity={handleCityChange} fetchData={fetchData} showForecast={showForecast} toggleForecast={toggleForecast} />
+                <SearchForm  changeUnit={handleUnitChange} unit={unit} changeCity={handleCityChange} fetchData={fetchData} showForecast={showForecast} toggleForecast={toggleForecast} />
 
                 <div>
                     {renderComponent()}
