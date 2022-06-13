@@ -30,7 +30,7 @@ const CurrentData = ({currentData, unit}) => {
   const isFahrenheit = unit === 'Fahrenheit'
     
     return (
-    <DataPanel data={data}>
+    <DataPanel data={data} className='container'>
       <div className='box' id='condition'>
         <h3>Condition:</h3>
         <p className='conditionText'>{data && both_Data.condition}</p>
@@ -71,12 +71,15 @@ const CurrentData = ({currentData, unit}) => {
 }
 
 const DataPanel = styled.div`
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 1rem;
+    .container {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 1rem;
+      margin: 0px auto;
+    }
     
     p {
       font-size: 2.5rem;

@@ -18,17 +18,6 @@ const WeatherPanel = () => {
 
     const {unit, city, userLocation, currentData, forecastData, isLoading, showForecast} = state;
     
-    /*
-    const [unit, setUnit] = useState('Fahrenheit');
-    const [city, setCity] = useState('');
-    const [currentData, setCurrentData] = useState({});
-    const [userLocation, setUserLocation] = useState({});
-    const [forecastData, setForecastData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [showForecast, setShowForecast] = useState(false);
-    */
-    
-
         const fetchData = () => {
             let baseUrl = 'https://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + city + '&days=3&aqi=no&alerts=no'
         
@@ -36,21 +25,6 @@ const WeatherPanel = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     dispatch({ type: 'PARSE_DATA', payload: data });
-                    /*
-                    setIsLoading(false);
-                    setUserLocation({
-                        city: data.location.name + ', ' + data.location.country,
-                        latlon: data.location.lat + ', ' + data.location.lon
-                    });
-                    setCurrentData({
-                        all: data.current, condition: data.current.condition
-                    });
-                    setForecastData([
-                        data.forecast.forecastday[0],
-                        data.forecast.forecastday[1],
-                        data.forecast.forecastday[2]
-                    ]);
-                    */
                 })
                 .catch((error) => console.error(error));
         }
