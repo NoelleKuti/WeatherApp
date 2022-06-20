@@ -28,11 +28,10 @@ const initialState = {
             .catch((error) => console.error(error));
     }
 
-
-     const handleCityChange = (e) => {
-             dispatch({ type: CHANGE_CITY, payload: e.target.value });
-             fetchData()
-     }
+    const handleCityChange = (e) => {
+        dispatch({ type: CHANGE_CITY, payload: e.target.value });
+            fetchData()
+    }
         
     const handleUnitChange = (e) => {
         dispatch({ type: CHANGE_UNIT, payload: e.target.value });
@@ -40,8 +39,6 @@ const initialState = {
     const toggleForecast = () => {
         dispatch({ type: SHOW_FORECAST });
     }
-
-
 
     return (
         <AppContext.Provider value={{
