@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { useAppContext } from '../context/appContext';
 
-const SearchForm = ({ unit, showForecast, changeCity, changeUnit, toggleForecast, fetchData }) => {
+const SearchForm = () => {
     
+    const { unit, showForecast, handleCityChange, handleUnitChange, toggleForecast } = useAppContext();
 
     const onSubmit = (e) => {
         e.preventDefault();
-        fetchData();
     }       
  
     return (
@@ -18,26 +19,25 @@ const SearchForm = ({ unit, showForecast, changeCity, changeUnit, toggleForecast
                         </label>
                         <input
                             className='cityInput'
-                            type='text' name='city' placeholder='Enter City Here' id='city' onChange={changeCity} />
+                            type='text' name='city' placeholder='Enter City Here' id='city' onChange={(e) => handleCityChange(e)} />
                     </div>
                 </div>
                 <div className='row unitField'>
                     <div className='row'>
                         <label htmlFor='Fahrenheit'>F</label>
                         <input type='radio' name='unit' id='Fahrenheit' value='Fahrenheit'
-                        checked={unit==='Fahrenheit'} onChange={changeUnit} />
+                        checked={unit==='Fahrenheit'} onChange={(e) => handleUnitChange(e)} />
                     </div>
                     <div className='row'>
                         <label htmlFor='Celsius'>C</label>
                         <input type='radio' name='unit' 
                         id='Celsius' value='Celsius'
                         checked={unit==='Celsius'} 
-                        onChange={changeUnit}  />
+                        onChange={(e) => handleUnitChange(e)}  />
                     </div>
                 </div>
                 < div className='buttons row'>
                     <button type='button' className='toggleForecast' onClick={toggleForecast}>{showForecast ? 'Current Forecast' : '3 Day Forecast'}</button>
-                    <button type='submit' className='submitBtn'> Submit </button>
                 </div>
             </div>
             

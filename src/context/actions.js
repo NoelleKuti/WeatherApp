@@ -1,0 +1,5 @@
+export const PARSE_DATA = 'PARSE_DATA'
+export const CLEAR_DATA = 'CLEAR_DATA'
+export const CHANGE_UNIT = 'CHANGE_UNIT'
+export const CHANGE_CITY = 'CHANGE_CITY'
+export const SHOW_FORECAST = 'SHOW_FORECAST'

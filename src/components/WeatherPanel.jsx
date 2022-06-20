@@ -2,47 +2,16 @@ import React, {useReducer} from 'react'
 import styled from 'styled-components';
 import { SearchForm, CurrentData, ForecastData } from "./index"
 import { myReducer } from '../context/reducer';
+import { useAppContext } from '../context/appContext';
 
 const WeatherPanel = () => {
-    const initialState = {
-        unit: 'Fahrenheit',
-        city: '',
-        userLocation: '',
-        currentData: {},
-        forecastData: [],
-        isLoading: true,
-        showForecast: false,
-    };
     
-    const [state, dispatch] = useReducer(myReducer, initialState);
-
-    const {unit, city, userLocation, currentData, forecastData, isLoading, showForecast} = state;
+    const { unit, userLocation, currentData, forecastData, isLoading, showForecast } = useAppContext();
     
-        const fetchData = () => {
-            let baseUrl = 'https://api.weatherapi.com/v1/forecast.json?key=b7bf7b0695b74998a88214335221401&q=' + city + '&days=3&aqi=no&alerts=no'
-        
-            return fetch(baseUrl)
-                .then((response) => response.json())
-                .then((data) => {
-                    dispatch({ type: 'PARSE_DATA', payload: data });
-                })
-                .catch((error) => console.error(error));
-        }
-
-    const handleCityChange = (e) => {
-        dispatch({ type: "CHANGE_CITY", payload: e.target.value });
-    }
-    const handleUnitChange = (e) => {
-        dispatch({ type: "CHANGE_UNIT", payload: e.target.value });
-    }
-    const toggleForecast = () => {
-        dispatch({ type: "SHOW_FORECAST" });
-    }
-
     const renderComponent = () => {
-        if (!isLoading && showForecast) {
+        if (showForecast) {
             return <ForecastData forecastData={forecastData} unit={unit} />
-        } else if (!isLoading && !showForecast) {
+        } else if (!showForecast) {
             return <CurrentData currentData={currentData} unit={unit} />
         } else {
             return <p> Still Loading ... </p>
@@ -52,17 +21,21 @@ const WeatherPanel = () => {
     return (
         <Panel>
             <div className='panel'>
-                <div className='headers'>
-                    <div className='latlon'>
-                        <p>{"(Lat, Lon) : " + (userLocation ? userLocation.latlon : '')}
-                       </p>
+                <SearchForm  />
+                
+                {(userLocation !== '') &&
+                    <div className='headers'>
+                        <div className='latlon'>
+                            <p>{"(Lat, Lon) : " + userLocation.latlon}</p>
+                        </div>
+                        <h2> {userLocation.city}</h2>
                     </div>
-                    <h2>{userLocation ? userLocation.city : ''}</h2>
-                </div>
-                <SearchForm  changeUnit={handleUnitChange} unit={unit} changeCity={handleCityChange} fetchData={fetchData} showForecast={showForecast} toggleForecast={toggleForecast} />
-
+                }
+    
                 <div>
-                    {renderComponent()}
+                    {!isLoading
+                        ? renderComponent()
+                        : <p className='noData'>No Data To Show</p>}
                 </div>
                
 
@@ -80,7 +53,7 @@ const Panel = styled.div`
         max-width: 35rem;
         min-height:50%;
         margin: 2rem auto;
-        padding: 2rem;
+        padding: 1rem;
         backdrop-filter: blur(16px) saturate(180%);
         -webkit-backdrop-filter: blur(16px) saturate(180%);
         background-color: rgba(202, 211, 232, 0.65);
@@ -110,6 +83,10 @@ const Panel = styled.div`
             width: 100%;
             text-align: center;
         }
+    }
+
+    .noData {
+        font-size: 3rem;
     }
     
 `
